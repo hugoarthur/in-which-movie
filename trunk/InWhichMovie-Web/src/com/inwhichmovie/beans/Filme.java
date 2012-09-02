@@ -2,7 +2,14 @@ package com.inwhichmovie.beans;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "filme")
 public class Filme implements Comparable<Filme>{
+	@Column(name = "idFilme")
+	@Id
 	private Integer id;
 	private String idImdb;
 	private String nome;

@@ -90,7 +90,7 @@ public class Main {
 			filme.setNomeOriginal(StringUtils.substringBetween(html, "<span class=\"title-extra\">", "<i>"));
 			filme.setAno(StringUtils.substringBetween(html, "<a href=\"/year/", "/\""));
 			System.out.println(filme);
-			getMusicas(filme, parser);
+//			getMusicas(filme, parser);
 			return filme;
 		} catch (ParserException e) {
 			// TODO Auto-generated catch block
