@@ -4,36 +4,42 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "filme")
 public class Filme implements Comparable<Filme>{
-	@Column(name = "idFilme")
+	@Column
 	@Id
-	private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idFilme;
+	@Column
 	private String idImdb;
+	@Column
 	private String nome;
+	@Column
 	private String nomeOriginal;
+	@Column
 	private String ano;
 	private List<Musica> musicas;
 	
-	
 	@Override
 	public String toString() {
-		return "Filme [idImdb=" + idImdb + ", nome=" + nome
-				+ ", nomeOriginal=" + nomeOriginal + ", ano=" + ano + "]";
+		return "Filme [idFilme=" + idFilme + ", idImdb=" + idImdb + ", nome="
+				+ nome + ", nomeOriginal=" + nomeOriginal + ", ano=" + ano
+				+ ", musicas=" + musicas + "]";
+	}
+
+	public Integer getIdFilme() {
+		return idFilme;
 	}
 
 
-	public Integer getId() {
-		return id;
-	}
-
-
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdFilme(Integer idFilme) {
+		this.idFilme = idFilme;
 	}
 
 

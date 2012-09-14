@@ -27,6 +27,7 @@ import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 
 import com.inwhichmovie.beans.Filme;
+import com.inwhichmovie.dao.FilmeDAO;
 
 /**
  *
@@ -44,12 +45,12 @@ public class Main {
     	Integer id = 848228;
     	int cont = 1;
     	filmes = new ArrayList<Filme>();
-    	while(id<848232){
+    	while(id<848240){
     		try {
-				if (isFilme(nf.format(id))) {
+				if (isValidFilme(nf.format(id))) {
 					gravaArquivo(getFilme(nf.format(id)));
 				}
-				Thread.sleep(10 * 1000);
+				Thread.sleep(5 * 1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -58,14 +59,14 @@ public class Main {
     	}
     }
     
-    public static boolean isFilme(String id){
+    public static boolean isValidFilme(String id){
     	String nomeUrl = "http://www.imdb.com/title/tt"+id+"/";
 			Parser parser;
 			try {
 				parser = new Parser(nomeUrl);
 				NodeList source = parser.extractAllNodesThatMatch((new CssSelectorNodeFilter("#overview-top")));
 				String html = source.toHtml();
-				if(!(html.contains("TV Series")||html.contains("Video Game")||html.contains("TV Episode")))
+				if(!(html.contains("TV Series")||html.contains("Video Game")||html.contains("TV Episode")||html.contains("Adult")))
 					return true;
 			} catch (ParserException e) {
 				// TODO Auto-generated catch block
@@ -120,7 +121,7 @@ public class Main {
     }
     
     public static void gravaArquivo(Object obj){
-    	try {
+    	/*try {
 			if (obj != null) {
 				FileOutputStream fos = new FileOutputStream(obj.getClass().toString() + ".txt", true);
 				fos.write(obj.toString().getBytes());
@@ -134,7 +135,9 @@ public class Main {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+    	FilmeDAO filmeDAO = new FilmeDAO();
+    	filmeDAO.add(obj);
     }
     
     public static void getFilmesAntigo(String id){

@@ -2,14 +2,19 @@ package com.inwhichmovie.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import com.inwhichmovie.beans.Filme;
 
 public class FilmeDAO implements AbstractDAO {
 
 	@Override
 	public void add(Object obj) {
-		// TODO Auto-generated method stub
-
+		EntityManager em = DataBaseFactory.getInstance().getEmf().createEntityManager();
+		em.getTransaction().begin();
+		em.persist(obj);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@Override
