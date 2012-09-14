@@ -6,25 +6,25 @@ import javax.persistence.Persistence;
 public class DataBaseFactory {
 	
 	private static DataBaseFactory dataBase;
-	private static EntityManagerFactory emf;
+	private EntityManagerFactory emf;
 	
 	public DataBaseFactory() {
 		if(emf == null)
 			emf = Persistence.createEntityManagerFactory("IN_WHICH_MOVIE");
 	}
 	
-	public DataBaseFactory getInstance(){
+	public static DataBaseFactory getInstance(){
 		if(dataBase == null)
 			dataBase = new DataBaseFactory();
 		return dataBase;
 	}
 
-	public static EntityManagerFactory getEmf() {
+	public EntityManagerFactory getEmf() {
 		return emf;
 	}
 
-	public static void setEmf(EntityManagerFactory emf) {
-		DataBaseFactory.emf = emf;
+	public void setEmf(EntityManagerFactory emf) {
+		this.emf = emf;
 	}
 
 }
