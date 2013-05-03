@@ -4,12 +4,14 @@ import java.util.List;
 
 public interface AbstractDAO {
 	public void add(Object obj);
-
+	
+	public void update(Object obj);
+	
 	public void remove(Object obj);
 
 	public Object findById(Integer id);
 
 	public Object findByName(String nome);
 
-	public List findAll();
+	public List<Object> findAll();
 }
