@@ -2,11 +2,13 @@ package com.inwhichmovie.beans;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,13 +26,16 @@ public class Filme implements Comparable<Filme> {
 	private String nomeOriginal;
 	@Column
 	private String ano;
+	@ManyToMany(cascade=CascadeType.PERSIST)
 	private List<Musica> musicas;
+	@Column
+	private String tipo;
 
 	@Override
 	public String toString() {
 		return "Filme [idFilme=" + idFilme + ", idImdb=" + idImdb + ", nome="
 				+ nome + ", nomeOriginal=" + nomeOriginal + ", ano=" + ano
-				+ ", musicas=" + musicas + "]";
+				+ ", musicas=" + musicas + ", tipo=" + tipo + "]";
 	}
 
 	public Integer getIdFilme() {
@@ -81,12 +86,20 @@ public class Filme implements Comparable<Filme> {
 		this.musicas = musicas;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public int compareTo(Filme o) {
 		// if((nome.compareToIgnoreCase(o.getNome()))==0)
 		// return nomeOriginal.compareToIgnoreCase(o.getNomeOriginal());
-		if (nome == null)
-			nome = "";
-		return nome.compareToIgnoreCase(o.getNome());
+		if (idImdb == null)
+			idImdb = "";
+		return idImdb.compareToIgnoreCase(o.getIdImdb());
 	}
 
 }
